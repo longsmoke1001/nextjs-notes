@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Personal Notes App - Next.js
 
-## Getting Started
+A Next.js frontend for the Personal Notes application.
 
-First, run the development server:
+![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38B2AC?logo=tailwind-css)
+
+## 🌐 Live Demo
+
+[https://longsmoke1001.github.io/nextjs-notes/](https://longsmoke1001.github.io/nextjs-notes/)
+
+**Login**: `admin` / `password`
+
+## ✨ Features
+
+- 🔐 JWT Authentication (Login / Logout)
+- 📝 Notes CRUD (Create / Read / Update / Delete)
+- 📄 Pagination
+- 🏷️ Categories (General / Diary / Password)
+- 📱 Responsive Design (Tailwind CSS)
+
+## 🛠️ Tech Stack
+
+- **Next.js 16** (App Router)
+- **TypeScript**
+- **Tailwind CSS**
+- **`fetch`**
+
+## 📁 Project Structure
+
+```
+nextjs-notes/
+  ├── app/
+  │     ├── layout.tsx          ← Root Layout
+  │     ├── page.tsx            ← Home Page
+  │     ├── login/
+  │     │     └── page.tsx      ← /login
+  │     └── notes/
+  │           └── page.tsx      ← /notes
+  ├── components/
+  │     ├── AddNote.tsx         ← Add Note Form
+  │     └── EditNote.tsx        ← Edit Note Form
+  └── lib/
+        └── api.ts              ← API Configuration
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 20+
+- Git
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/longsmoke1001/nextjs-notes.git
+cd nextjs-notes
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create `.env.local`:
+
+```
+NEXT_PUBLIC_API_URL=https://personal-notes-api-eeh2exdphmcccaat.germanywestcentral-01.azurewebsites.net
+```
+
+### 4. Start the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔑 Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+`.env.local`:
 
-## Learn More
+```
+NEXT_PUBLIC_API_URL=https://personal-notes-api-eeh2exdphmcccaat.germanywestcentral-01.azurewebsites.net
+```
 
-To learn more about Next.js, take a look at the following resources:
+**Note**: `.env.local` is not committed to GitHub. For production, environment variables are set in the GitHub Actions workflow.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚢 Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is automatically deployed to GitHub Pages via GitHub Actions.
 
-## Deploy on Vercel
+```bash
+git add .
+git commit -m "Update"
+git push
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The workflow will:
+1. Install dependencies
+2. Build the Next.js app
+3. Deploy to GitHub Pages
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🔗 Related Repositories
+
+- **Backend API + React Version**: [DotNetRepo](https://github.com/longsmoke1001/DotNetRepo)
+
+## 📝 License
+
+MIT License
+
+## 👤 Author
+
+**Huang Long Yin, Leo**
+- GitHub: [@longsmoke1001](https://github.com/longsmoke1001)
