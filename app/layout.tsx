@@ -26,18 +26,18 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="zh-HK">
+    <html lang="en">
       <body className="min-h-screen bg-gray-100">
         {token && (
           <nav className="bg-slate-800 text-white px-6 py-4 flex justify-between items-center shadow-md">
             <Link href="/notes" className="font-semibold hover:underline">
-              我的筆記
+              My Notes
             </Link>
             <button
               onClick={handleLogout}
               className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded transition"
             >
-              登出
+              Log out
             </button>
           </nav>
         )}

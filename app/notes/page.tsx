@@ -52,7 +52,7 @@ export default function NotesPage() {
     setRefreshKey(prev => prev + 1);
   };
   const handleDelete = async (id: number) => {
-    if (!window.confirm('確定刪除呢個筆記？')) return;
+    if (!window.confirm('Delete this note?')) return;
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/Notes/${id}`, {
@@ -66,18 +66,18 @@ export default function NotesPage() {
       setRefreshKey(prev => prev + 1);
     } catch (err) {
       console.error('Delete error:', err);
-      alert('刪除失敗');
+      alert('Delete failed');
     }
   };
-  if (loading) return <p className="text-center py-10 text-gray-500">載入中...</p>;
+  if (loading) return <p className="text-center py-10 text-gray-500">Loading...</p>;
 
   return (
     <div className="max-w-3xl mx-auto">
       <AddNote token={token!} onNoteAdded={handleNoteAdded} />
-      <h2 className="text-2xl font-bold mb-4">我的筆記</h2>
+      <h2 className="text-2xl font-bold mb-4">My Notes</h2>
 
       {notes.length === 0 ? (
-        <p className="text-gray-500">暫時冇筆記</p>
+        <p className="text-gray-500">No notes yet</p>
       ) : (
         <ul className="space-y-4">
           {notes.map((note) => (
@@ -102,13 +102,13 @@ export default function NotesPage() {
                   onClick={() => setEditingId(note.id)}
                   className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded text-sm transition"
                 >
-                  編輯
+                  Edit
                 </button>
                 <button
                   onClick={() => handleDelete(note.id)}
                   className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded text-sm transition"
                 >
-                  刪除
+                  Delete
                 </button>
               </div>
             </li>
@@ -122,17 +122,19 @@ export default function NotesPage() {
           disabled={pageNumber === 1}
           className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded transition disabled:opacity-50"
         >
-          上一頁
+          Previous
         </button>
 
-        <span className="text-gray-700">第 {pageNumber} / {totalPages} 頁</span>
+        <span className="text-gray-700">
+          Page {pageNumber} of {totalPages}
+        </span>
 
         <button
           onClick={() => setPageNumber(prev => Math.min(prev + 1, totalPages))}
           disabled={pageNumber === totalPages}
           className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded transition disabled:opacity-50"
         >
-          下一頁
+          Next
         </button>
       </div>
     </div>

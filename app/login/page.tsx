@@ -30,7 +30,7 @@ export default function LoginPage() {
       router.push('/notes');
 
     } catch (err) {
-      setError('登入失敗，請檢查電郵同密碼');
+      setError('Login failed. Please check your email and password.');
     } finally {
       setLoading(false);
     }
@@ -38,10 +38,10 @@ export default function LoginPage() {
 
   return (
     <div className="max-w-md mx-auto mt-20 bg-white p-8 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">登入</h2>
+      <h2 className="text-2xl font-bold text-center text-gray-900 mb-6">Log in</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block mb-2 font-medium text-gray-900">電郵：</label>
+          <label className="block mb-2 font-medium text-gray-900">Email:</label>
           <input
             type="text"
             value={email}
@@ -51,7 +51,7 @@ export default function LoginPage() {
           />
         </div>
         <div className="mb-4">
-          <label className="block mb-2 font-medium text-gray-900">密碼：</label>
+          <label className="block mb-2 font-medium text-gray-900">Password:</label>
           <input
             type="password"
             value={password}
@@ -65,7 +65,7 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded transition disabled:opacity-50"
         >
-          {loading ? '登入中...' : '登入'}
+          {loading ? 'Logging in...' : 'Log in'}
         </button>
         {error && <p className="text-red-500 mt-3 text-sm">{error}</p>}
       </form>

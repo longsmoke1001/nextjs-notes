@@ -15,5 +15,5 @@ export default function HomePage() {
     }
   }, [router]);
 
-  return <p className="text-center py-10">載入中...</p>;
+  return <p className="text-center py-10">Loading...</p>;
 }
