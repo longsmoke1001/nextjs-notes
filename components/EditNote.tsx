@@ -74,7 +74,7 @@ export default function EditNote({ token, note, onNoteUpdated, onCancel }: EditN
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
           >
             <option value="general">General</option>
-            <option value="dairy">Diary</option>
+            <option value="diary">Diary</option>
             <option value="password">Password</option>
           </select>
         </div>

@@ -77,7 +77,7 @@ export default function AddNote({ token, onNoteAdded }: AddNoteProps) {
           >
             <option value='All'>All</option> 
             <option value="general">General</option>
-            <option value="dairy">Diary</option>
+            <option value="diary">Diary</option>
             <option value="password">Password</option>
           </select>
         </div>
