@@ -14,6 +14,7 @@ export default function NotesPage() {
   const [token, setToken] = useState<string | null>(null);
   const [refreshKey, setRefreshKey] = useState(0);
   const [editingId, setEditingId] = useState<number | null>(null);
+  const [category, setCategory] = useState('All');
   const router = useRouter();
 
   useEffect(() => {
@@ -31,7 +32,8 @@ export default function NotesPage() {
     const fetchNotes = async () => {
       try {
         const response = await fetch(
-          `${API_BASE_URL}/api/Notes?pageNumber=${pageNumber}&pageSize=10`,
+
+          (category === 'All' ? `${API_BASE_URL}/api/Notes?pageNumber=${pageNumber}&pageSize=10` : `${API_BASE_URL}/api/Notes/category/${category}?pageNumber=${pageNumber}&pageSize=10`),
           {
             headers: { Authorization: `Bearer ${token}` }
           }
@@ -47,7 +49,7 @@ export default function NotesPage() {
     };
 
     fetchNotes();
-  }, [token, pageNumber, refreshKey]);
+  }, [token, pageNumber, refreshKey, category]);
   const handleNoteAdded = () => {
     setRefreshKey(prev => prev + 1);
   };
@@ -74,8 +76,15 @@ export default function NotesPage() {
   return (
     <div className="max-w-3xl mx-auto">
       <AddNote token={token!} onNoteAdded={handleNoteAdded} />
-      <h2 className="text-2xl font-bold mb-4">My Notes</h2>
-
+      <div className="flex justify-between items-center mt-6 mb-4">
+        <h2 className="text-2xl font-bold mb-4">My Notes</h2>
+        <select className="border bg-gray-200 border-gray-300 rounded-md py-2 px-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500" value={category} onChange={(e) => setCategory(e.target.value)}>
+            <option value="All">All</option>
+            <option value="general">General</option>
+            <option value="diary">Diary</option>
+            <option value="password">Password</option>
+        </select>
+      </div>
       {notes.length === 0 ? (
         <p className="text-gray-500">No notes yet</p>
       ) : (
@@ -95,24 +104,31 @@ export default function NotesPage() {
               </li>
             ) : (
               <li key={note.id} className="bg-white p-5 rounded-lg shadow-sm">
-                <h3 className="text-lg font-semibold text-slate-800 mb-2">{note.title}</h3>
+                <div className="flex justify-between items-center mb-2 text-lg font-semibold text-slate-800">
+                  <h3>
+                    {note.title}
+                  </h3>
+                  <span>
+                    {note.category}
+                  </span>
+                </div>
                 <p className="text-slate-800 whitespace-pre-wrap">{note.content}</p>
                 <div className="flex gap-2">
                   <button
-                  onClick={() => setEditingId(note.id)}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded text-sm transition"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(note.id)}
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded text-sm transition"
-                >
-                  Delete
-                </button>
-              </div>
-            </li>
-          )))}
+                    onClick={() => setEditingId(note.id)}
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded text-sm transition"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(note.id)}
+                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-1 rounded text-sm transition"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </li>
+            )))}
         </ul>
       )}
 

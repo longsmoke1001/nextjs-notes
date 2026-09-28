@@ -45,7 +45,7 @@ export default function AddNote({ token, onNoteAdded }: AddNoteProps) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md mb-6 text-black">
+    <div className="bg-white p-6 rounded-lg shadow-md mb-6 text-">
       <h3 className="text-xl font-bold mb-4">Add Note</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
@@ -75,6 +75,7 @@ export default function AddNote({ token, onNoteAdded }: AddNoteProps) {
             onChange={(e) => setCategory(e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
           >
+            <option value='All'>All</option> 
             <option value="general">General</option>
             <option value="dairy">Diary</option>
             <option value="password">Password</option>
