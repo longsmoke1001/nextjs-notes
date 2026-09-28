@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { API_BASE_URL } from '@/lib/api';
 
-export default function LoginPage() {
-  const [email, setEmail] = useState('');
+export default function RegisterForm() {
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,47 +18,49 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/Auth/login`, {
+      const response = await fetch(`${API_BASE_URL}/api/Auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: email, password })
+        body: JSON.stringify({ username, password })
       });
 
-      if (!response.ok) throw new Error('Login failed');
+      if (!response.ok) {
+        throw new Error('Registration failed');
+      }
 
       const data = await response.json();
       localStorage.setItem('token', data.token);
       router.push('/notes');
 
     } catch (err) {
-      setError('Login failed. Please check your email and password.');
+      setError('Registration failed. Username or email may already be taken.');
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20 bg-gray-800 p-8 rounded-lg shadow-md ">
-      <h2 className="text-2xl font-bold text-center mb-6">Log in</h2>
+    <div className="max-w-md mx-auto mt-20 bg-gray-800 p-8 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block mb-2 font-medium ">Email:</label>
+          <label className="block mb-2 font-medium">Username:</label>
           <input
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
-            className="w-full px-3 py-2   placeholder:text-gray-500 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
           />
         </div>
         <div className="mb-4">
-          <label className="block mb-2 font-medium ">Password:</label>
+          <label className="block mb-2 font-medium">Password:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            className="w-full px-3 py-2  placeholder:text-gray-500 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
           />
         </div>
         <button
@@ -65,17 +68,16 @@ export default function LoginPage() {
           disabled={loading}
           className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded transition disabled:opacity-50"
         >
-          {loading ? 'Logging in...' : 'Log in'}
-        </button>
-        <button
-          type="button"
-          onClick={() => router.push('/register')}
-          className="w-full mt-4 bg-gray-500 hover:bg-gray-600 text-white py-2 rounded transition"
-        >
-          {'Register'}
+          {loading ? 'Registering...' : 'Register'}
         </button>
         {error && <p className="text-red-500 mt-3 text-sm">{error}</p>}
       </form>
+      <p className="text-center mt-4 text-sm text-gray-600">
+        Already have an account?{' '}
+        <Link href="/login" className="text-blue-500 hover:underline">
+          Login
+        </Link>
+      </p>
     </div>
   );
 }
