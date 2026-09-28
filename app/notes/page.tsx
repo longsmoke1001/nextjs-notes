@@ -96,7 +96,7 @@ export default function NotesPage() {
             ) : (
               <li key={note.id} className="bg-white p-5 rounded-lg shadow-sm">
                 <h3 className="text-lg font-semibold text-slate-800 mb-2">{note.title}</h3>
-                <p className="text-gray-600">{note.content}</p>
+                <p className="text-slate-800 whitespace-pre-wrap">{note.content}</p>
                 <div className="flex gap-2">
                   <button
                   onClick={() => setEditingId(note.id)}
