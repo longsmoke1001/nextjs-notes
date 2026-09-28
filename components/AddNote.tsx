@@ -45,7 +45,7 @@ export default function AddNote({ token, onNoteAdded }: AddNoteProps) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md mb-6 text-">
+    <div className="bg-white text-gray-700 p-6 rounded-lg shadow-md mb-6 text-">
       <h3 className="text-xl font-bold mb-4">Add Note</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
