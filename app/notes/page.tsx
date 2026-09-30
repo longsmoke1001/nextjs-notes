@@ -43,6 +43,8 @@ export default function NotesPage() {
         setTotalPages(data.totalPages || 1);
       } catch (err) {
         console.error('Fetch notes error:', err);
+        alert('Failed to fetch notes');
+        router.push('/login');
       } finally {
         setLoading(false);
       }
